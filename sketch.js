@@ -91,33 +91,14 @@ function ResetBoard() {
 function SolveBoard() {
   console.log("Solving");
   let result = Solve(board);
-  msg = result ? "There is a solution" : " No solution";
+  msg = result ? "Show solution" : " No solution";
   window.alert(msg);
   console.log(result);
   console.log("Finished");
 }
 
 function Solve(board) {
-  let row = 0;
-  let col = 0;
-  let rowCol = board.FindEmpty();
-  if (rowCol == null) {
-    return true;
-  } else {
-    [row, col] = rowCol;
-  }
-
-  // Pick a number
-  for (let num = 1; num <= board.rows; num++) {
-    if (board.IsPossible(row, col, num)) {
-      board.grid[row][col].value = num;
-      if (Solve(board)) {
-        return true;
-      }
-      board.grid[row][col].value = 0;
-    }
-  }
-  return false;
+  return board.Solve();
 }
 
 function ChangeDifficulyLevel() {
